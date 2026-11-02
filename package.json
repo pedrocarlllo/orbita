@@ -1,0 +1,58 @@
+{
+  "name": "orbita-universal-plugin-desktop",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Aplicativo desktop local para gerenciamento seguro do ORBITA MCP.",
+  "main": "desktop/main.cjs",
+  "scripts": {
+    "start": "electron .",
+    "test": "npm run test:server && node --test desktop/test/*.test.cjs",
+    "test:server": "npm test --prefix orbita-agent/server",
+    "check": "node --check desktop/main.cjs && node --check desktop/manager.cjs && node --check desktop/preload.cjs && node --check desktop/renderer.js",
+    "dist:win": "electron-builder --win nsis --x64 --publish never"
+  },
+  "devDependencies": {
+    "electron": "45.2.1",
+    "electron-builder": "26.18.0"
+  },
+  "build": {
+    "appId": "com.orbita.universalplugin",
+    "productName": "ORBITA Universal Plugin",
+    "asar": true,
+    "directories": {
+      "output": "release"
+    },
+    "files": [
+      "desktop/**/*",
+      "package.json",
+      "!desktop/test/**/*"
+    ],
+    "extraResources": [
+      {
+        "from": "orbita-agent/server",
+        "to": "server",
+        "filter": ["src/**/*", "package.json", "!src/**/*.bak*", "!src/**/*.backup*", "!src/core_backup/**/*"]
+      },
+      {
+        "from": "orbita-agent/server/node_modules",
+        "to": "server/node_modules",
+        "filter": ["**/*"]
+      }
+    ],
+    "win": {
+      "target": ["nsis"],
+      "artifactName": "ORBITA-Universal-Plugin-Setup-x64.${ext}"
+    },
+    "nsis": {
+      "oneClick": false,
+      "perMachine": false,
+      "allowElevation": false,
+      "allowToChangeInstallationDirectory": true,
+      "createDesktopShortcut": false,
+      "createStartMenuShortcut": true,
+      "include": "desktop/scripts/installer.nsh",
+      "deleteAppDataOnUninstall": false,
+      "runAfterFinish": true
+    }
+  }
+}

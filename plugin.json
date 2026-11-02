@@ -1,0 +1,39 @@
+{
+  "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
+  "name": "orbita-agent",
+  "version": "0.1.0",
+  "description": "Agente local universal independente de projetos, com acesso controlado à pasta que o usuário selecionar.",
+  "author": {
+    "name": "ORBITA Project"
+  },
+  "keywords": [
+    "universal-agent",
+    "mcp",
+    "local-agent",
+    "windows",
+    "project-tools",
+    "software-engineering"
+  ],
+  "extensions": {
+    "com.openai": {
+      "interface": {
+        "displayName": "ORBITA",
+        "shortDescription": "Agente universal local",
+        "longDescription": "Agente universal local para ChatGPT Desktop/Codex. É instalado fora dos projetos e pode alternar entre projetos e pastas que o usuário selecionar por caminho absoluto. Fornece inspeção, leitura, pesquisa, Git, alterações com prévia e tarefas de teste autorizadas.",
+        "developerName": "ORBITA Project",
+        "category": "Developer Tools",
+        "capabilities": [
+          "Read",
+          "Write",
+          "Interactive"
+        ],
+        "defaultPrompt": [
+          "ORBITA, aguarde eu indicar o caminho do projeto e depois faça uma análise completa.",
+          "ORBITA, troque para a pasta de projeto que eu indicar e investigue este problema.",
+          "ORBITA, analise o projeto selecionado e proponha alterações com evidências."
+        ],
+        "brandColor": "#2563EB"
+      }
+    }
+  }
+}
